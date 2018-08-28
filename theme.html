@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
     <head>
         <title>{Title}</title>
@@ -11,7 +12,6 @@
         {block:IndexPage}
         <script src="http://static.tumblr.com/wgijwsy/Ebfm2v4gy/jquery.masonry.min.js"></script>
         <script
-          
          src="http://static.tumblr.com/wgijwsy/u2vm2hxv6/jquery.infinitescroll.min.js"></script>
         <script>
         function show(id) {
@@ -85,6 +85,7 @@
             body {
                 margin: 0;
                 padding: 0;
+                height: 120vh;
                 background: #FFFFFF;
                 background-image: url('{image:Background}');
                 background-attachment: fixed;
@@ -1003,6 +1004,14 @@
                 {block:ifNOTShowPhotoBorder}
             }
 
+            #content .photoset {
+                width: calc({select:Rows}% + 2%);
+                {block:ifNOTShowPhotoBorder}
+                padding: 0 !important;
+                width: calc({select:Rows}% + 4%);
+                {block:ifNOTShowPhotoBorder}
+            }
+
 
             {CustomCSS}
 
@@ -1061,26 +1070,17 @@
                     <!--</article>-->
                 {/block:Text}{block:Photo}
                     <article id="{PostID}" class="post photo">
+                      <a target="_blank" href="{Permalink}">
+
+
                         <img src="{PhotoURL-500}" alt="{PhotoAlt}"/>
+                      </a>
 
                         {block:IndexPage}
-                         <div style="{block:ifShowPhotoCaption} display: none; {/block:ifShowPhotoCaption}" class="hover">
-                            <div class="buttons">
-                                <div id="like">{LikeButton size="18" color="White"}</div>
-                                <div id="reblog">{ReblogButton size="18" color="White"}</div>
-                                <div id="notes">
-                                 <a target="_blank" href="{Permalink}">{NoteCount}</a>
-                                </div>
-                            </div>
-                         </div>
-
-                         {block:ifShowPhotoCaption}
 
                          {block:Caption}
                          <div class="caption">{Caption}</div>
                          {/block:Caption}
-
-                         {/block:ifShowPhotoCaption}
                         {/block:IndexPage}
 
                     <!--</article>-->
@@ -1097,18 +1097,13 @@
                        {block:IndexPage}
                        <div class="photoset-grid" data-layout="{PhotosetLayout}">
                         {block:Photos}
+                        <a target="_blank" href="{Permalink}">
                           <img class="image" src="{PhotoURL-500}" {block:Caption}alt="{Caption}"{/block:Caption} />
+                          </a>
+                          <!--{/block:Photos}-->
                         {/block:Photos}
                         </div>
                         {/block:IndexPage}
-
-                        {block:ifShowPhotoCaption}
-                         {block:IndexPage}
-                         {block:Caption}
-                         <div class="caption">{Caption}</div>
-                         {/block:Caption}
-                         {/block:IndexPage}
-                        {/block:ifShowPhotoCaption}
 
                         {block:PermalinkPage}
                         {Photoset-500}
@@ -1218,17 +1213,6 @@
                  {/block:Answer}
 
 
-                {block:IndexPage}
-                <div  style="{block:Photo} display: none; {block:Photo} {block:ifShowPhotoCaption} display: block; {/block:ifShowPhotoCaption}"  class="control">
-                    <a href="{Permalink}" title="Permalink Page" class="notes">{NoteCountWithLabel}</a>
-
-                    <div id="buttons">
-                      <div id="like">{LikeButton size="16" color="Black"}</div>
-                      <div id="reblog">{ReblogButton size="16" color="Black"}</div>
-                    </div>
-
-                </div>
-                {/block:IndexPage}
                 </article>
 
                   {block:PermalinkPage}
