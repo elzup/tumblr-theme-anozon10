@@ -542,6 +542,10 @@
 		padding: 0 5px;
 	}
 
+	.caption {
+		padding: 0 5px;
+	}
+
 	.audio #caption {
 		margin-top: 46px;
 	}
@@ -1387,7 +1391,7 @@
 					// show elems now they're ready
 					$newElems.animate({ opacity: 1 });
 					$container.masonry("appended", $newElems, true);
-					console.log($newElems, $newElemsIDs);
+					// console.log($newElems, $newElemsIDs);
 					Tumblr.LikeButton.get_status_by_post_ids($newElemsIDs);
 				});
 			}
