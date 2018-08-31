@@ -1,0 +1,9 @@
+{
+	"name": "tumblr-theme-anozon10",
+	"version": "1.0.0",
+	"description": "tumblr theme workspace",
+	"main": "index.js",
+	"repository": "git@github.com:elzup/tumblr-theme-anozon10.git",
+	"author": "elzup <guild0105@gmail.com>",
+	"license": "MIT"
+}
