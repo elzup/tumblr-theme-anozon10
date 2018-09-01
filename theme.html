@@ -125,7 +125,7 @@
 	}
 
 	#content a{
-		color: #000; /* color:Link */
+		color: {color:Link};
 		text-decoration: none;
 		border-bottom: 1px solid rgba(100, 100, 100, 0.2);
 	}
@@ -631,45 +631,17 @@
 		line-height: 40px;
 	}
 
-	.permalinkpage .notescontainer{
+	.permalinkpage .notescontainer {
 		width: 470px;
 		margin-top: 12px;
-		background-color: #FFF;
+		background-color: {color:Background};
 		padding: 15px;
 		color: {color:Text}; /* Text color */
 	}
 
 	.permalinkpage .notescontainer #info {
-		position: relative;
-		height: 22px;
-		width: 100%;
-	}
-
-	.permalinkpage .notescontainer #info #left{
-		text-align: left;
-		width: 470px;
-		left: 0px;
-		top: 0px;
-		font-size: 18px;
-		position: absolute;
-	}
-
-	.permalinkpage .notescontainer #info #center{
-		text-align: center;
-		width: 470px;
-		left: 0px;
-		top: 5px;
-		font-size: 12px;
-		position: absolute;
-	}
-
-	.permalinkpage .notescontainer #info #right{
-		text-align: right;
-		width: 470px;
-		right: 0px;
-		top: 0px;
-		font-size: 18px;
-		position: absolute;
+		display: flex;
+		justify-content: space-between;
 	}
 
 	.permalinkpage .notescontainer #caption{
@@ -1023,11 +995,13 @@
 	}
 
 	#content .photoset {
+		{block:IndexPage}
 		width: calc({select:Rows}% + 2%);
 		{block:ifNOTShowPhotoBorder}
 		padding: 0 !important;
 		width: calc({select:Rows}% + 4%);
 		{block:ifNOTShowPhotoBorder}
+		{/block:IndexPage}
 	}
 
 
@@ -1123,14 +1097,17 @@
 			{/block:Text}
 			{block:Photo}
 			<article id="{PostID}" class="post photo">
+				{block:IndexPage}
 				<a target="_blank" href="{Permalink}">
 					<img src="{PhotoURL-500}" alt="{PhotoAlt}"/>
 				</a>
-				{block:IndexPage}
 				{block:Caption}
 				<div class="caption">{Caption}</div>
 				{/block:Caption}
 				{/block:IndexPage}
+				{block:PermalinkPage}
+					<img src="{PhotoURL-500}" alt="{PhotoAlt}"/>
+				{/block:PermalinkPage}
 
 				<!--</article>-->
 			</article>
@@ -1162,7 +1139,7 @@
 				{/block:IndexPage}
 
 				{block:PermalinkPage}
-				{Photoset-500}
+				{Photoset-700}
 				{/block:PermalinkPage}
 
 				<!--</article>-->
@@ -1282,33 +1259,11 @@
 			{/block:Answer}
 
 			{block:PermalinkPage}
-			{block:Date}
-			{block:RebloggedFrom}
-			<div class="reblogs">
-				<div style="{block:ContentSource}width: 49%;{/block:ContentSource}" id="reblog">Reblogged from: <a target="_blank" href="{ReblogParentURL}">{ReblogParentName}</a></div>
-				{block:ContentSource}
-				<div id="source">Source: <a target="_blank" href="{SourceURL}">{SourceTitle}</a></div>
-				{/block:ContentSource}
-			</div>
-			{/block:RebloggedFrom}
 			<div class="notescontainer">
 
-
-				<div id="info">
-					<div id="left">{DayOfMonthWithZero}.{MonthNumberWithZero}.{ShortYear}</div>
-					<div id="center">{NoteCountWithLabel}</div>
-					<div id="right">{TimeAgo}</div>
-				</div>
-
-				{block:Caption}
-				<div id="caption">
-					{/block:Caption}
-
+				{block:Caption}<div id="caption">{/block:Caption}
 					{Caption}
-
-					{block:Caption}
-				</div>
-				{/block:Caption}
+				{block:Caption}</div>{/block:Caption}
 
 				{block:HasTags}
 				<ul id="tags">
@@ -1320,10 +1275,18 @@
 				</ul>
 				{/block:HasTags}
 
-				{PostNotes}
+				<div id="info">
+					{block:RebloggedFrom}
+					<div>
+						<a target="_blank" href="{ReblogParentURL}">info</a>
+					</div>
+					{/block:RebloggedFrom}
+					{block:Date}
+					<div>{Year}/{MonthNumberWithZero}/{DayOfMonthWithZero}</div>
+					{/block:Date}
+				</div>
 			</div>
 		</div>
-		{/block:Date}
 		{block:PermalinkPage}
 		{/block:Posts}
 
